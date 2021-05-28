@@ -57,28 +57,37 @@ void deleteAtHead(node* &head)
 }
 
 
-node* reverse(node* &head)
+node* Reverse_k_nodes(node* &head , int k)
 {
-    node* prevptr = NULL;
-    node* currptr= head;
-    node* nextptr = head -> next;
+node* prevptr = NULL;
+node* currptr = head;
+node* nxtptr = head -> next;
 
-    while(currptr!=NULL)
-    {
-        nextptr = currptr -> next;
-        currptr -> next = prevptr;
+int count =0;
+while(currptr != NULL && count<k)
+{
+    nxtptr = currptr -> next;
+    currptr -> next = prevptr;
+
+    prevptr =currptr;
+    currptr = nxtptr;
+    count++;
+}
 
 
-        prevptr = currptr;
-        currptr = nextptr;
-
-    }
+if(nxtptr != NULL)
+{
+    head -> next = Reverse_k_nodes(nxtptr,k);
+}
 
 
 return prevptr;
 
-
 }
+
+
+
+
 
 
 int main()
@@ -89,11 +98,12 @@ int main()
     insertAtTail(head,2);
     insertAtTail(head,3);
     insertAtTail(head,4);
+    insertAtTail(head,5);
 
     display(head);
 
 
-    node* newHead = reverse(head);
+    node* newHead = Reverse_k_nodes(head,2);
     display(newHead);
     
 }

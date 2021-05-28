@@ -57,28 +57,20 @@ void deleteAtHead(node* &head)
 }
 
 
-node* reverse(node* &head)
+node* Recursive_reverse(node* &head)
 {
-    node* prevptr = NULL;
-    node* currptr= head;
-    node* nextptr = head -> next;
-
-    while(currptr!=NULL)
+    if(head == NULL || head -> next == NULL)
     {
-        nextptr = currptr -> next;
-        currptr -> next = prevptr;
-
-
-        prevptr = currptr;
-        currptr = nextptr;
-
+        return head;
     }
-
-
-return prevptr;
-
-
+    node* newHead = Recursive_reverse( head -> next);
+    head -> next -> next = head;
+    head -> next = NULL;
+    return newHead;
 }
+
+
+
 
 
 int main()
@@ -93,7 +85,7 @@ int main()
     display(head);
 
 
-    node* newHead = reverse(head);
+    node* newHead = Recursive_reverse(head);
     display(newHead);
     
 }
