@@ -96,7 +96,7 @@ void deletion(node* &head, int pos){
 
 
     temp -> prev -> next  = temp -> next;
-    if(temp -> next != NULL){
+     if(temp -> next != NULL){
     temp -> next -> prev =  temp -> prev;
     }
     delete temp;
